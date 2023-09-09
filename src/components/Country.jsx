@@ -1,12 +1,38 @@
+import { useState } from "react";
 import "./country.css";
 const Country = ({ country }) => {
-  console.log(country.cca3);
-  const { name, flags } = country;
+  console.log(country);
+  const { name, flags, population, area } = country;
+  const [visited, setVisited] = useState(false);
+  const handleVisit = () => {
+    setVisited(!visited);
+  };
+
   return (
-    <div className="country">
+    <div
+      className="country"
+      style={
+        visited
+          ? { backgroundColor: "black", color: "white" }
+          : { backgroundColor: "white" }
+      }
+    >
       {" "}
       <h3>{name?.official}</h3>
-      <img src={flags?.png} alt={name?.official} />
+      <h5 style={{ color: "slategray" }}>
+        {visited ? " I visited this country" : " "}
+      </h5>
+      <img
+        style={{ height: "200px", width: "300px" }}
+        src={flags?.png}
+        alt={name?.official}
+      />
+      <p>Area: {area}</p>
+      <p>Population: {population}</p>
+      <button onClick={handleVisit} style={{ backgroundColor: "gainsboro" }}>
+        {visited ? "Visited" : "Going?"}
+      </button>
+      {visited ? " " : " Wanna visit?"}
     </div>
   );
 };
